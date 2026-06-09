@@ -70,6 +70,34 @@ Este checklist é aplicado em TODA análise, sem exceção. Nenhum item pode ser
 - Bons resultados iniciais em uma semana podem ser flutuação — confirmar com pelo menos 2 semanas antes de escalar.
 - Apontar se existe viés de confirmação presente na análise.
 
+**8. O público tem desejo ou capacidade real de compra?**
+- Interesse em anime ≠ intenção de comprar um curso. Estamos confundindo engajamento com comportamento de compra?
+- O avatar identificado tem acesso a meios de pagamento? (Público 13–17 anos frequentemente não tem cartão de crédito próprio — isso é risco real de conversão)
+- Há evidência de que esse público específico compra produtos digitais nessa faixa de preço, ou estamos assumindo por analogia?
+- `[DADO AUSENTE]` se não houver evidência de compra real neste nicho e faixa etária.
+
+**9. Estamos confundindo interesse com intenção de compra?**
+- Alto engajamento em conteúdo gratuito (YouTube, TikTok) é sinal de interesse, não de intenção de compra.
+- Um público que consome muito conteúdo gratuito sobre o tema pode ter menor propensão a pagar — não maior.
+- Questionar: qual é a evidência de que esse avatar abre carteira para esse tipo de produto?
+
+**10. A promessa tem risco de parecer exagerada?**
+- A promessa de "7 dias" para um iniciante total pode gerar ceticismo em vez de desejo.
+- Se a promessa parece boa demais, o avatar pode desconfiar antes de clicar — ou clicar mas não comprar.
+- Avaliar: a promessa é crível para o avatar mais cético do público-alvo? Ou só para os mais esperançosos?
+
+**11. A campanha está fragmentando orçamento?**
+- Revisar a estrutura de conjuntos proposta: o número de conjuntos é compatível com o budget diário?
+- Budget < R$100/dia dividido em 3+ conjuntos = cada conjunto com menos de R$33/dia = algoritmo sem sinal suficiente para aprender.
+- Apontar explicitamente se a estrutura proposta fragmenta o orçamento abaixo do mínimo funcional por conjunto.
+- Regra: R$25/dia é o mínimo por conjunto para produto low ticket com CPA meta de R$15–20.
+
+**12. O sistema inventou algum dado sem validação?**
+- Revisar todos os números apresentados na análise: take rates (OB, upsell), CPM, CTR, CVR, CPA estimado.
+- Cada número deve ser classificado como `[DADO VALIDADO]`, `[ESTIMATIVA]`, `[HIPÓTESE]` ou `[DADO AUSENTE]`.
+- Se algum número foi apresentado como fato sem essa classificação, identificar e corrigir.
+- Específico para take rates: "35% de OB" e "20% de upsell" são estimativas de mercado, não dados reais — sinalizar sempre.
+
 ---
 
 ## Output Obrigatório

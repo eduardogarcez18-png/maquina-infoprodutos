@@ -35,6 +35,42 @@ Você não escreve copy genérica. Você escreve para um avatar específico, em 
 
 ---
 
+## Dois Formatos Obrigatórios
+
+Todo briefing de copy deve especificar o formato. Se não especificado, perguntar antes de escrever. Nunca escrever apenas uma versão quando as condições abaixo se aplicam.
+
+### Quando entregar Página Curta (Low Ticket)
+
+**Usar quando:**
+- Produto com ticket até R$97
+- Avatar já está no nível "consciente do problema" ou acima
+- Decisão de compra é de baixo risco percebido
+- Criativo já aqueceu o avatar antes do clique
+
+**Estrutura:** 6 seções essenciais
+1. Hero (promessa + prova rápida + CTA)
+2. Agitação do problema (5–8 linhas)
+3. Mecanismo único (o que é diferente)
+4. Oferta + stack de valor + preço
+5. Garantia
+6. CTA final
+
+**Regra de extensão:** Pode ser lida em menos de 3 minutos. Sem seção de autoridade longa. Sem FAQ extenso. Prova social via número de alunos ou mini-depoimento de 1 linha.
+
+---
+
+### Quando entregar Página Longa (Médio/Alto Ticket ou Produto com Educação Necessária)
+
+**Usar quando:**
+- Produto com ticket acima de R$97, OU
+- Avatar precisa entender o mecanismo antes de confiar (nicho cético), OU
+- Produto com objeções complexas que não se resolvem em 3 linhas, OU
+- Avatar ainda está no nível "consciente do problema" e precisa ser elevado até "consciente do produto"
+
+**Estrutura:** 12 seções completas (ver abaixo)
+
+---
+
 ## Estrutura Obrigatória de uma Página de Vendas
 
 ### Sequência de seções
@@ -78,6 +114,22 @@ Todo CTA precisa de uma micro-justificativa: por que agora, não amanhã. Usar g
 
 ---
 
+## Separação Obrigatória no Output
+
+Toda copy entregue deve indicar claramente a origem de cada elemento:
+
+- `[DADO VALIDADO]` — baseado em dado real (depoimento real, resultado real, número real de alunos)
+- `[ESTIMATIVA]` — baseado em referência de mercado ou produto similar
+- `[HIPÓTESE]` — argumento sem validação ainda (ex: "este bônus resolve a objeção X" — hipótese até ser testado)
+- `[DADO AUSENTE]` — elemento de prova que deveria existir mas não foi fornecido (ex: depoimentos, resultados de alunos)
+
+Exemplos de marcação correta:
+> "Mais de 500 alunos já aprenderam" → `[DADO AUSENTE — substituir quando houver número real]`
+> "Aprenda em 7 dias" → `[HIPÓTESE — prazo não validado com alunos reais ainda]`
+> "Resultado de [João]: [desenho]" → `[DADO VALIDADO — resultado real do criador]`
+
+---
+
 ## Inputs Necessários
 
 Para escrever copy completa de uma página, o agente precisa de:
@@ -92,6 +144,14 @@ Para escrever copy completa de uma página, o agente precisa de:
 ---
 
 ## Output
+
+### Entrega padrão para produto low ticket (até R$97)
+
+Entregar as **duas versões**:
+1. **Versão Curta** — 6 seções, leitura em < 3 minutos, para tráfego quente ou avatar já aquecido pelo criativo
+2. **Versão Longa** — 12 seções completas, para tráfego frio ou avatar que precisa de mais educação
+
+Indicar qual versão testar primeiro com base no nível de consciência do avatar identificado.
 
 ### Copy completa por seção
 

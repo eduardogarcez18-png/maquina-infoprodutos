@@ -53,8 +53,10 @@ Cada dia tem um foco que não muda — independente do produto ou fase.
 1. Definir as 3 prioridades da semana com base no diagnóstico
 2. Definir o critério de sucesso da semana — um número específico
 3. Para cada dia, preencher: foco + tarefas concretas + métrica + critério de corte
-4. Não deixar nenhum dia sem tarefa definida — indefinição é paralisação
-5. Dia 7 deve terminar com uma decisão documentada (escalar / pausar / reiniciar) e o próximo plano iniciado
+4. Para cada teste ou decisão do plano, documentar: hipótese testada + métrica de validação + volume mínimo de dados + decisão possível + próxima ação
+5. Não deixar nenhum dia sem tarefa definida — indefinição é paralisação
+6. Dia 7 deve terminar com uma decisão documentada (escalar / pausar / reiniciar) e o próximo plano iniciado
+7. Separar explicitamente o que é fato, estimativa e hipótese em cada item do plano
 
 ---
 
@@ -105,9 +107,14 @@ Foco: cortar o que ultrapassou critério de corte, realocar budget
 - [ ] Tarefa: se pausou algum conjunto, redistribuir budget para os que estão ok
 
 **Dia 5 — [Data] — NOVAS VARIAÇÕES**
-Foco: substituir o que foi pausado com variação baseada em hipótese
+Foco: substituir o que foi pausado com variação baseada em hipótese documentada
 
-- [ ] Tarefa: lançar [criativo alternativo] com ângulo [X] | Hipótese: ...
+- [ ] Tarefa: lançar [criativo alternativo] com ângulo [X]
+  - Hipótese testada: "Se [avatar] reage a [ângulo], então [métrica] deve [comportamento esperado]"
+  - Métrica de validação: [CTR / Hook Rate / CVR / CPA]
+  - Volume mínimo de dados: [impressões / dias / R$ gastos antes de decidir]
+  - Decisão possível: [manter se X / pausar se Y]
+  - Próxima ação se confirmado: [o que fazer quando a hipótese for validada]
 - [ ] Tarefa: ajustar público se CPM > R$X | Ação: ...
 
 **Dia 6 — [Data] — OTIMIZAÇÃO**
@@ -135,9 +142,42 @@ Foco: decidir o que acontece na semana 2
 
 ---
 
+## Estrutura obrigatória de cada hipótese no plano
+
+Todo item de teste ou decisão do plano deve conter:
+
+```
+- Hipótese testada: "Se [avatar/situação], então [ação/variável] deve gerar [resultado mensurável]"
+- Métrica de validação: [métrica específica — CTR, CPA, CVR, Hook Rate etc.]
+- Volume mínimo de dados: [X impressões OU X dias OU R$X gastos antes de decidir]
+- Decisão possível: [manter se ≥X / pausar se <Y / iterar se entre X e Y]
+- Próxima ação: [o que acontece imediatamente após confirmar ou refutar a hipótese]
+```
+
+Se um item do plano não tiver esses 5 campos preenchidos, o item está incompleto.
+
+---
+
+## Separação obrigatória por tipo de informação
+
+Ao gerar o plano, usar os marcadores:
+- `[DADO VALIDADO]` — vem de campanha real já rodada (pixel, Ads Manager, plataforma)
+- `[ESTIMATIVA]` — baseado em benchmarks de mercado ou produtos similares
+- `[HIPÓTESE]` — suposição lógica sem dado de suporte ainda
+- `[DADO AUSENTE]` — informação necessária que não foi fornecida
+
+Exemplo de uso correto:
+> CPA meta: R$17 `[ESTIMATIVA baseada em LTV calculado]`
+> CTR benchmark: 1–3% `[ESTIMATIVA de mercado]`
+> Take rate de OB: 35% `[HIPÓTESE — sem dado validado neste produto]`
+
+---
+
 ## Regras de qualidade
 
 - Tarefa sem métrica = tarefa incompleta
+- Hipótese sem volume mínimo de dados = hipótese não testável
 - Dia 7 sem decisão documentada = plano não executado
 - Decisão de escala sem passar pelo `advogado-do-diabo` = protocolo violado
 - Plano que não gera o próximo plano = ciclo quebrado
+- Estimativa apresentada como fato = erro de epistemologia — corrigir antes de entregar

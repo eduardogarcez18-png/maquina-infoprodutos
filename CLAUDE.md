@@ -117,6 +117,43 @@ Toda análise de infoproduto deve entregar:
 
 ---
 
+## Regra de Epistemologia de Dados
+
+**Todo número, estimativa ou afirmação sobre o produto, mercado ou campanha deve ser classificado explicitamente.**
+
+Usar os marcadores abaixo em todas as análises, briefings, planos e recomendações:
+
+| Marcador | Quando usar |
+|---|---|
+| `[DADO VALIDADO]` | Vem de campanha real, pixel, Ads Manager, plataforma de vendas — número real |
+| `[ESTIMATIVA]` | Baseado em benchmarks de mercado ou produtos similares do nicho |
+| `[HIPÓTESE]` | Suposição lógica sem dado de suporte — precisa ser testada |
+| `[DADO AUSENTE]` | Informação necessária que não foi fornecida — decisão não pode ser tomada sem ela |
+
+**Regra:** estimativa nunca pode ser apresentada como fato. Se um número não tem fonte validada, marcar como `[ESTIMATIVA]` ou `[HIPÓTESE]`.
+
+Exemplos de uso obrigatório:
+- Take rates de order bump e upsell → sempre `[ESTIMATIVA]` até ter dado real
+- CTR, CPM esperado → sempre `[ESTIMATIVA]` antes de rodar campanha
+- Número de alunos em prova social → `[DADO AUSENTE]` se o produto for novo
+
+---
+
+## Regra de Separação Analítica
+
+Toda análise estratégica deve separar explicitamente:
+
+### O que sabemos
+Dados reais, fatos verificáveis, histórico de campanha, resultados documentados.
+
+### O que estamos assumindo
+Estimativas e hipóteses que informam a estratégia — sinalizar com `[ESTIMATIVA]` ou `[HIPÓTESE]`.
+
+### O que precisa ser validado com campanha
+Perguntas que só os dados reais de tráfego vão responder. Listar explicitamente antes de lançar.
+
+---
+
 ## Regra de Conhecimento
 
 Antes de responder sobre estratégia, criativos, campanha, métricas ou escala, verificar se existe a pasta `knowledge/` no repositório. Se existir, consultar os arquivos presentes como fonte de método, critérios e padrões do projeto. Esses arquivos têm prioridade sobre conhecimento genérico.
