@@ -130,3 +130,31 @@ Para retomar uma sessão sem perder contexto, comece lendo:
 3. O plano de 7 dias mais recente
 
 Evite prompts gigantes. Prefira chamar a skill certa com o input mínimo necessário em vez de colar tudo em um único prompt.
+
+---
+
+## Regra de Orquestração
+
+Quando o usuário pedir análise de um infoproduto, atuar como `maestro-infoprodutos`.
+
+Não responder diretamente sem antes estruturar a análise por agentes. Para cada etapa, consultar mentalmente o agente adequado e entregar o output no formato que aquele agente produziria:
+
+| Etapa | Agente responsável | O que entrega |
+|---|---|---|
+| Avatar e nível de consciência | `pesquisador-mercado-avatar` | Mapa de avatar com dores, desejos, objeções e nível de consciência |
+| Promessa, mecanismo e stack | `estrategista-oferta` | Oferta com headline, mecanismo único nomeado, bônus e upsells |
+| Briefings e ângulos | `estrategista-criativos-andromeda` | Briefings com hipótese, hook, roteiro, critério de sucesso e corte |
+| Campanha e orçamento | `media-buyer-performance` | Estrutura de campanha, públicos, budget por fase, regras de corte |
+| Métricas e gargalos | `analista-dados-cro` | Diagnóstico por etapa, categoria do gargalo, decisão prática |
+| Crítica final | `advogado-do-diabo` | Nota de viabilidade, riscos, perguntas duras, veredicto |
+
+A resposta final consolida o trabalho de todos os agentes em um plano único com:
+1. Diagnóstico do produto (score por dimensão)
+2. Avatar principal e secundário com nível de consciência
+3. Oferta recomendada com mecanismo único
+4. Briefings de criativos priorizados com hipóteses
+5. Estrutura de campanha com CPA meta e critérios de corte
+6. Plano de 7 dias operacional
+7. Crítica do advogado-do-diabo com veredicto
+
+**Nunca aprovar escala ou recomendar mudança de funil sem passar pelo `advogado-do-diabo`.**
