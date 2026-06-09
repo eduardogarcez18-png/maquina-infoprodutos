@@ -60,6 +60,8 @@ Cada arquivo em `.claude/agents/` define papel, responsabilidades, tom e comport
 | `media-buyer-performance` | Estrutura campanhas no Meta Ads e Google Ads, define regras de corte e escala. |
 | `analista-dados-cro` | Interpreta métricas, identifica gargalos por etapa do funil, sugere testes de CRO. |
 | `advogado-do-diabo` | Valida criticamente cada estratégia antes de executar. Dá nota de viabilidade 0–10. |
+| `copywriter-pagina-vendas` | Escreve copy completa de páginas de vendas — hero, argumento, prova, oferta, garantia, FAQ e CTAs. |
+| `web-designer-conversao` | Estrutura wireframes e sistemas visuais de páginas de vendas. Conversão tem prioridade sobre estética. |
 
 ---
 
@@ -76,6 +78,11 @@ Skills não são agentes. São processos reutilizáveis — frameworks, checklis
 | `montar-campanha-meta` | Produto, oferta, criativos, budget, objetivo | Estrutura de campanha, públicos, regras de corte |
 | `analisar-metricas` | CPL, CPA, CTR, ROAS, CVR por etapa, budget gasto | Diagnóstico por etapa + categoria do gargalo + decisão |
 | `gerar-plano-7-dias` | Diagnóstico atual, fase do produto, recursos | Plano dia a dia com foco fixo, tarefas e métricas |
+| `criar-copy-pagina-vendas` | Oferta, avatar, copy do criativo, formato da página | Copy completa por seção com mapa de objeções e variações de CTA |
+| `estruturar-wireframe-vendas` | Copy completa, produto, formato, elementos de prova | Wireframe mobile-first por seção + mapa de CTAs + checklist de fricção |
+| `analisar-cro-pagina` | URL/copy da página, CVR atual, taxa de checkout, fonte de tráfego | Diagnóstico por seção + gargalo classificado + hipóteses priorizadas |
+| `criar-secao-hero` | Promessa, copy do criativo, avatar, ponto de partida, prazo | Headline (3 variações), subheadline, bullets, CTA, prova rápida, direção visual |
+| `criar-design-system-pagina` | Produto, nicho, avatar, formato da página | Paleta, tipografia, botões, cards, espaçamento e sequência de seções |
 
 ---
 
