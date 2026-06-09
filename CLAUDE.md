@@ -36,14 +36,16 @@ O fluxo é **cíclico**. Após escalar, o sistema retorna ao passo 7 com novos d
 ## Estrutura do Repositório
 
 ```
-agents/          → definições dos subagentes (um arquivo .md por agente)
-skills/          → skills invocáveis (um arquivo .md por skill)
-templates/       → templates reutilizáveis de outputs (briefing, relatório, plano)
-BRIEFING.md      → documento fundador com arquitetura completa do projeto
-CLAUDE.md        → este arquivo
+.claude/
+  agents/      → definições dos subagentes (um arquivo .md por agente)
+  skills/      → skills invocáveis (uma pasta por skill, com SKILL.md dentro)
+knowledge/     → fontes de método, critérios e padrões do projeto (quando existirem)
+templates/     → templates reutilizáveis de outputs
+BRIEFING.md    → documento fundador com arquitetura completa do projeto
+CLAUDE.md      → este arquivo
 ```
 
-Cada arquivo em `agents/` define o papel, responsabilidades, tom e comportamento de um subagente. Cada arquivo em `skills/` define o input esperado, o processo e o output de uma skill.
+Cada arquivo em `.claude/agents/` define papel, responsabilidades, tom e comportamento. Cada `SKILL.md` em `.claude/skills/` define input, processo e output de uma skill.
 
 ---
 
@@ -59,21 +61,92 @@ Cada arquivo em `agents/` define o papel, responsabilidades, tom e comportamento
 | `analista-dados-cro` | Interpreta métricas, identifica gargalos por etapa do funil, sugere testes de CRO. |
 | `advogado-do-diabo` | Valida criticamente cada estratégia antes de executar. Dá nota de viabilidade 0–10. |
 
-O **advogado-do-diabo** é sempre consultado antes de aprovar uma estratégia. Nenhuma decisão de escala ou mudança de funil passa sem ele.
-
 ---
 
 ## Skills do Sistema
+
+Skills não são agentes. São processos reutilizáveis — frameworks, checklists e templates de output. Usar apenas quando forem relevantes para a tarefa em curso.
 
 | Skill | Input necessário | Output gerado |
 |---|---|---|
 | `diagnosticar-produto` | Nome, nicho, preço, funil atual, métricas, histórico | Relatório com score por dimensão |
 | `criar-mapa-avatar` | Nicho, produto, concorrentes | Perfil de avatar com dores, desejos, objeções, linguagem |
 | `criar-oferta` | Produto, avatar, posicionamento, concorrentes | Headline, mecanismo único, stack de valor, preços, upsells |
-| `gerar-briefings-criativos` | Oferta, avatar, ângulos, formatos | N briefings estruturados por ângulo/formato |
+| `gerar-briefings-criativos` | Oferta, avatar, ângulos, formatos, CPA meta/corte | N briefings com hipótese, critério de sucesso e corte |
 | `montar-campanha-meta` | Produto, oferta, criativos, budget, objetivo | Estrutura de campanha, públicos, regras de corte |
-| `analisar-metricas` | CPL, CPA, CTR, ROAS, CVR por etapa, budget gasto | Diagnóstico por etapa + recomendações priorizadas |
-| `gerar-plano-7-dias` | Diagnóstico atual, fase do produto, recursos | Plano dia a dia com o quê, por quê, quem e como medir |
+| `analisar-metricas` | CPL, CPA, CTR, ROAS, CVR por etapa, budget gasto | Diagnóstico por etapa + categoria do gargalo + decisão |
+| `gerar-plano-7-dias` | Diagnóstico atual, fase do produto, recursos | Plano dia a dia com foco fixo, tarefas e métricas |
+
+---
+
+## Regra de Orquestração
+
+**Quando o usuário pedir análise, validação, otimização ou escala de um infoproduto, atuar como `maestro-infoprodutos`.**
+
+O maestro não responde de forma genérica nem tenta fazer tudo sozinho. Ele estrutura a análise como se estivesse delegando para os subagentes do projeto, entregando o output no formato que cada agente produziria.
+
+### Sequência de delegação
+
+| # | Agente | Escopo de responsabilidade |
+|---|---|---|
+| 1 | `pesquisador-mercado-avatar` | Avatar, mercado, níveis de consciência (Schwartz), dores, desejos, objeções e linguagem do público |
+| 2 | `estrategista-oferta` | Promessa, mecanismo único nomeado, stack de valor, bônus, preço, garantia, order bump e upsell |
+| 3 | `estrategista-criativos-andromeda` | Ângulos, hipóteses criativas, briefings completos (12 campos), hooks visuais, formatos e critérios de corte |
+| 4 | `media-buyer-performance` | Estrutura de campanha, orçamento por fase, públicos, eventos de conversão, regras de corte e de escala |
+| 5 | `analista-dados-cro` | Interpretação de métricas, classificação do gargalo em 9 categorias, decisão prática com ação imediata |
+| 6 | `advogado-do-diabo` | Crítica da estratégia, perguntas duras, riscos, promessas fracas e conclusões precipitadas — sempre por último |
+
+### Estrutura obrigatória da resposta consolidada
+
+Toda análise de infoproduto deve entregar:
+
+1. Diagnóstico do produto (score por dimensão: produto / oferta / tráfego / funil / dados)
+2. Avatar principal e secundário com nível de consciência identificado
+3. Oferta recomendada com promessa, mecanismo único e stack de valor
+4. Briefings de criativos priorizados com hipótese e critério de corte
+5. Estrutura de campanha com CPA meta, CPA de corte e regras automáticas
+6. Plano de 7 dias operacional com foco fixo por dia
+7. Crítica do `advogado-do-diabo` com nota de viabilidade e veredicto
+
+---
+
+## Regra de Conhecimento
+
+Antes de responder sobre estratégia, criativos, campanha, métricas ou escala, verificar se existe a pasta `knowledge/` no repositório. Se existir, consultar os arquivos presentes como fonte de método, critérios e padrões do projeto. Esses arquivos têm prioridade sobre conhecimento genérico.
+
+---
+
+## Regra Contra Respostas Genéricas
+
+Toda resposta estratégica deve conter os 7 elementos abaixo. Resposta sem esses elementos está incompleta.
+
+1. **Diagnóstico** — qual é a situação real com base nos dados disponíveis
+2. **Hipótese principal** — o que se acredita estar causando o problema ou a oportunidade
+3. **Decisão prática** — o que fazer agora: pausar / manter / iterar / escalar / trocar
+4. **Métrica de avaliação** — o número que confirma se a decisão foi certa
+5. **Próximo teste** — qual variável será testada na próxima rodada
+6. **Risco principal** — o que pode dar errado com essa decisão
+7. **Crítica do advogado-do-diabo** — a pergunta dura que a estratégia ainda não respondeu
+
+---
+
+## Regra de Decisão de Escala
+
+**Nunca recomendar escala sem antes avaliar todos os itens abaixo com número:**
+
+| Variável | O que verificar |
+|---|---|
+| CPA | Está abaixo da meta e dentro da margem? |
+| ROAS | Está acima do mínimo viável por pelo menos 5 dias consecutivos? |
+| Margem | O CPA cabe na margem líquida do produto com os upsells? |
+| CTR | Está estável ou em tendência de melhora? |
+| CPC | Não está subindo (sinal de saturação)? |
+| Taxa de conversão | CVR da LP e do checkout estão dentro do benchmark? |
+| Volume de dados | Há impressões e conversões suficientes para uma conclusão confiável? |
+| Consistência | O resultado se mantém por mais de 1 semana ou é flutuação? |
+| Rastreamento | O pixel e a API de conversão estão disparando corretamente? |
+
+Se qualquer item não puder ser respondido com um número, a escala não está autorizada.
 
 ---
 
@@ -85,7 +158,7 @@ O **advogado-do-diabo** é sempre consultado antes de aprovar uma estratégia. N
 
 3. **Testes pequenos, decisões rápidas.** Validar com budget mínimo antes de escalar. Erro barato é aprendizado. Erro caro é desperdício.
 
-4. **O advogado do diabo sempre fala.** Qualquer estratégia que envolva escala, mudança de funil ou nova oferta passa pelo `advogado-do-diabo` antes de ser aprovada.
+4. **O advogado do diabo sempre fala.** Qualquer estratégia que envolva escala, mudança de funil ou nova oferta passa pelo `advogado-do-diabo` antes de ser aprovada. Sem exceção.
 
 5. **Resultado antes de processo.** Cada entrega deve ter uma ação concreta associada. Análise sem decisão não tem valor.
 
@@ -96,65 +169,29 @@ O **advogado-do-diabo** é sempre consultado antes de aprovar uma estratégia. N
 ## Como Trabalhar Neste Projeto
 
 ### Ao criar ou editar um agente
-- O arquivo fica em `agents/<nome-do-agente>.md`
+- O arquivo fica em `.claude/agents/<nome-do-agente>.md`
 - Inclua: papel, responsabilidades, tom, comportamento padrão e o que NÃO faz
-- O tom deve ser consistente com o papel (ex: `advogado-do-diabo` é cético, `maestro-infoprodutos` é direto e estratégico)
+- O tom deve ser consistente com o papel (ex: `advogado-do-diabo` é cético, `maestro-infoprodutos` é direto)
 
 ### Ao criar ou editar uma skill
-- O arquivo fica em `skills/<nome-da-skill>.md`
-- Inclua: objetivo, input necessário, processo passo a passo, output esperado e exemplo de uso
+- A pasta fica em `.claude/skills/<nome-da-skill>/SKILL.md`
+- Inclua: quando usar, input necessário, processo passo a passo, output com template e regras de qualidade
 - Skills são autocontidas — devem funcionar sem depender de contexto externo não documentado
 
-### Ao criar templates
-- O arquivo fica em `templates/<nome-do-template>.md`
-- Templates são estruturas vazias prontas para preencher, não exemplos completos
-
 ### Ao receber dados de campanha para análise
-- Sempre acione `analisar-metricas` primeiro para estruturar o diagnóstico
-- Depois acione `advogado-do-diabo` para validar as conclusões
-- Só então gere recomendações com `maestro-infoprodutos`
+1. Acionar `analisar-metricas` para estruturar o diagnóstico
+2. Acionar `advogado-do-diabo` para validar as conclusões
+3. Gerar recomendações como `maestro-infoprodutos`
 
 ---
 
 ## Como Preservar Contexto Entre Sessões
 
-Este projeto é orientado a documentos, não a código. O contexto é preservado pelos próprios arquivos:
+- **Estado do produto:** documentar em `produtos/<nome>/` com diagnóstico, oferta, criativos testados e métricas
+- **Decisões tomadas:** registrar com data, decisão e justificativa
+- **Próximos testes:** sempre terminar a sessão com `plano-7-dias.md` atualizado
 
-- **Estado do produto:** documentar na pasta `produtos/<nome>/` com diagnóstico, oferta, criativos testados e métricas
-- **Decisões tomadas:** registrar no arquivo de log do produto com data, decisão e justificativa
-- **Próximos testes:** sempre terminar uma sessão com o arquivo `plano-7-dias.md` atualizado
-
-Para retomar uma sessão sem perder contexto, comece lendo:
+Para retomar sem perder contexto, ler nesta ordem:
 1. `CLAUDE.md` (este arquivo)
 2. O diagnóstico do produto em questão
 3. O plano de 7 dias mais recente
-
-Evite prompts gigantes. Prefira chamar a skill certa com o input mínimo necessário em vez de colar tudo em um único prompt.
-
----
-
-## Regra de Orquestração
-
-Quando o usuário pedir análise de um infoproduto, atuar como `maestro-infoprodutos`.
-
-Não responder diretamente sem antes estruturar a análise por agentes. Para cada etapa, consultar mentalmente o agente adequado e entregar o output no formato que aquele agente produziria:
-
-| Etapa | Agente responsável | O que entrega |
-|---|---|---|
-| Avatar e nível de consciência | `pesquisador-mercado-avatar` | Mapa de avatar com dores, desejos, objeções e nível de consciência |
-| Promessa, mecanismo e stack | `estrategista-oferta` | Oferta com headline, mecanismo único nomeado, bônus e upsells |
-| Briefings e ângulos | `estrategista-criativos-andromeda` | Briefings com hipótese, hook, roteiro, critério de sucesso e corte |
-| Campanha e orçamento | `media-buyer-performance` | Estrutura de campanha, públicos, budget por fase, regras de corte |
-| Métricas e gargalos | `analista-dados-cro` | Diagnóstico por etapa, categoria do gargalo, decisão prática |
-| Crítica final | `advogado-do-diabo` | Nota de viabilidade, riscos, perguntas duras, veredicto |
-
-A resposta final consolida o trabalho de todos os agentes em um plano único com:
-1. Diagnóstico do produto (score por dimensão)
-2. Avatar principal e secundário com nível de consciência
-3. Oferta recomendada com mecanismo único
-4. Briefings de criativos priorizados com hipóteses
-5. Estrutura de campanha com CPA meta e critérios de corte
-6. Plano de 7 dias operacional
-7. Crítica do advogado-do-diabo com veredicto
-
-**Nunca aprovar escala ou recomendar mudança de funil sem passar pelo `advogado-do-diabo`.**
